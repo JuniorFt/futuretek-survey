@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -86,6 +87,28 @@ public class BaseActivity extends Activity {
                             dlg.dismiss();
                         }
                     });
+            dlg.show();
+        }catch (Exception e){
+        }
+    }
+
+    protected void openInputDialog(final View.OnClickListener onClickListener, String text) {
+        final Dialog dlg = new Dialog(this);
+        dlg.setContentView(R.layout.dialog);
+        try{
+            ((Button) dlg.findViewById(R.id.okBtn)).setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    dlg.dismiss();
+                    onClickListener.onClick(dlg.getWindow().getDecorView());
+                }
+            });
+            dlg.setOnCancelListener(
+                    new DialogInterface.OnCancelListener() {
+                        public void onCancel(DialogInterface dialog) {
+                            dlg.dismiss();
+                        }
+                    });
+            ((TextView)dlg.findViewById(R.id.textViewDialog)).setText(text);
             dlg.show();
         }catch (Exception e){
         }

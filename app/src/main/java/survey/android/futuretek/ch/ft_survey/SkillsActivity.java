@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -47,7 +48,12 @@ public class SkillsActivity extends BaseActivity {
         ((ViewGroup)findViewById(R.id.textLayout)).removeAllViews();
         List<String> textArray = new ArrayList<>(1);
         textArray.add("Please add a developer skill");
-        animateText(textArray);
+        animateText(textArray, new AnimationListDone() {
+            // Let the user add one new skill when the text is displayed
+            public void done() {
+                askNewSkill();
+            }
+        });
         _productlist.clear();
         _productlist = getDatabase().getAllSkills();
         adapter = new ListAdapter(this);
@@ -102,6 +108,18 @@ public class SkillsActivity extends BaseActivity {
         TextView textView;
         Button delBtn;
 
+    }
+
+    private void askNewSkill(){
+        openInputDialog(new View.OnClickListener() {
+            public void onClick(View v) {
+                EditText userInput = ((EditText) v.findViewById(R.id.userInput));
+                String skill = userInput.getText().toString();
+                if (skill != null && !skill.isEmpty()) {
+                    insertSkill(skill);
+                }
+            }
+        }, "New Skill");
     }
 
     private void insertSkill(String skill){

@@ -75,7 +75,7 @@ public class ApplicationTest {
         // because the text animation is slower
         onView(isRoot()).perform(waitId(R.id.textView1, TimeUnit.SECONDS.toMillis(10)));
         // Check the text before input is the right one
-        onView(withId(R.id.textView1)).check(matches(withText("Name: ")));
+        onView(withId(R.id.textViewDialog)).check(matches(withText("Name: ")));
     }
 
     @Test
@@ -87,7 +87,7 @@ public class ApplicationTest {
         onView(isRoot()).perform(waitId(R.id.userInput, TimeUnit.SECONDS.toMillis(1)));
 
         // Check the display of the dialog again
-        onView(withId(R.id.textView1)).check(matches(withText("Name: ")));
+        onView(withId(R.id.textViewDialog)).check(matches(withText("Name: ")));
     }
 
     @Test
