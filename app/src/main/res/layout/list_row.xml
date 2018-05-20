@@ -13,6 +13,17 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/btn_bg"
         android:text="\u2718" />
+    <Button
+        android:id="@+id/editBtn"
+        android:layout_width="55dp"
+        android:layout_height="wrap_content"
+        android:textSize="22dp"
+        android:fontFamily="monospace"
+        android:textColor="#09FF00"
+        android:background="@drawable/btn_bg"
+        android:text="\u270E"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@+id/deleteBtn" />
     <TextView
         android:id="@+id/textView1"
         android:layout_width="match_parent"

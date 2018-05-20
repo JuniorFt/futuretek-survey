@@ -95,6 +95,30 @@ public class SkillsActivity extends BaseActivity {
                         adapter.notifyDataSetChanged();
                     }
                 });
+
+                viewHolder.editBtn = (Button) convertView.findViewById(R.id.editBtn);
+                viewHolder.editBtn.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        ViewGroup row = ((ViewGroup)v.getParent());
+                        // Get the old value to pre-fill the input text
+                        final CharSequence oldSkill = ((TextView)row.getChildAt(2)).getText();
+                        final String id = ((TextView)row.findViewById(R.id.textView1)).getText().toString();
+                        openInputDialog(new View.OnClickListener() {
+                            public void onClick(View v) {
+                                EditText userInput = ((EditText) v.findViewById(R.id.userInput));
+                                String skill = userInput.getText().toString();
+                                if (skill != null && !skill.isEmpty()) {
+                                    getDatabase().updateSkill(id, skill);
+                                    _productlist = getDatabase().getAllSkills();
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                        }, "New Skill", oldSkill.toString());
+
+
+                    }
+                });
+
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
@@ -107,6 +131,7 @@ public class SkillsActivity extends BaseActivity {
     private class ViewHolder {
         TextView textView;
         Button delBtn;
+        Button editBtn;
 
     }
 

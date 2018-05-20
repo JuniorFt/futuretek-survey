@@ -129,6 +129,16 @@ public class Database extends SQLiteOpenHelper {
 		}
 	}
 
+	public void updateSkill(String key, String value) {
+		if(getSkill(key)!=null) {
+			SQLiteDatabase db = this.getWritableDatabase();
+			ContentValues values = new ContentValues();
+			values.put(fieldID, value);
+			db.update(tableSkills, values, fieldID + " = ?", new String[]{String.valueOf(key)});
+			db.close();
+		}
+	};
+
 	public String getSkill(String key) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.query(tableSkills, SKILL_COLUMNS, " id = ?", new String[] { String.valueOf(key) }, null, null, null, null);

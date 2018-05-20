@@ -92,7 +92,7 @@ public class BaseActivity extends Activity {
         }
     }
 
-    protected void openInputDialog(final View.OnClickListener onClickListener, String text) {
+    protected void openInputDialog(final View.OnClickListener onClickListener, String... strs) {
         final Dialog dlg = new Dialog(this);
         dlg.setContentView(R.layout.dialog);
         try{
@@ -108,7 +108,12 @@ public class BaseActivity extends Activity {
                             dlg.dismiss();
                         }
                     });
-            ((TextView)dlg.findViewById(R.id.textViewDialog)).setText(text);
+            if (strs.length >= 1) {
+                ((TextView)dlg.findViewById(R.id.textViewDialog)).setText(strs[0]);
+                if (strs.length == 2) {
+                    ((TextView)dlg.findViewById(R.id.userInput)).setText(strs[1]);
+                }
+            }
             dlg.show();
         }catch (Exception e){
         }
